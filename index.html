@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +13,6 @@
             overflow-x: hidden;
         }
 
-        /* Battlefield chess board background pattern */
         .chess-bg {
             background-image: 
                 repeating-linear-gradient(0deg, transparent, transparent 35px, rgba(30, 30, 30, 0.3) 35px, rgba(30, 30, 30, 0.3) 70px),
@@ -40,7 +38,6 @@
             z-index: 1;
         }
 
-        /* Animated gradient for title */
         .gradient-text {
             background: linear-gradient(-45deg, #ff0000, #ff6b00, #0066ff, #00ffff);
             background-size: 400% 400%;
@@ -56,7 +53,6 @@
             50% { background-position: 100% 50%; }
         }
 
-        /* Hexagonal borders */
         .hex-border {
             clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
             padding: 2px;
@@ -68,7 +64,6 @@
             background: rgba(10, 10, 10, 0.95);
         }
 
-        /* Piece cards with battlefield aesthetic */
         .piece-card {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             background: linear-gradient(135deg, rgba(20, 20, 30, 0.9), rgba(10, 10, 20, 0.9));
@@ -98,7 +93,6 @@
             border-color: rgba(100, 150, 255, 0.5);
         }
 
-        /* Input styling */
         .piece-input, .config-input {
             background: rgba(15, 15, 25, 0.8);
             border: 1px solid rgba(100, 100, 150, 0.3);
@@ -114,14 +108,12 @@
             background: rgba(20, 20, 35, 0.95);
         }
 
-        /* Stat bars */
         .stat-bar {
             background: linear-gradient(90deg, rgba(30, 30, 50, 0.6), rgba(20, 20, 40, 0.6));
             border: 1px solid rgba(100, 150, 200, 0.3);
             backdrop-filter: blur(10px);
         }
 
-        /* Message box */
         #messageBox {
             position: fixed;
             top: 20px;
@@ -141,7 +133,6 @@
             transform: translateX(0) !important;
         }
 
-        /* Collapsible details */
         details summary {
             cursor: pointer;
             list-style: none;
@@ -172,7 +163,6 @@
             transform: rotate(90deg);
         }
 
-        /* Team color classes */
         .runners-color { color: #3b82f6; }
         .chasers-color { color: #ef4444; }
         .runners-bg { background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(30, 65, 123, 0.15)); }
@@ -180,7 +170,6 @@
         .runners-border { border-color: rgba(59, 130, 246, 0.5); }
         .chasers-border { border-color: rgba(239, 68, 68, 0.5); }
 
-        /* Fog of war visualization */
         .fog-indicator {
             display: inline-block;
             width: 12px;
@@ -197,7 +186,6 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* Leader highlight */
         .leader-name {
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
@@ -213,7 +201,6 @@
             font-size: 1.1rem;
         }
 
-        /* Tactical grid lines */
         .tactical-section {
             position: relative;
             border: 1px solid rgba(100, 150, 200, 0.2);
@@ -235,7 +222,6 @@
             opacity: 0.3;
         }
 
-        /* Button styling */
         .btn-tactical {
             background: linear-gradient(135deg, #4c87b7, #2d5a7f);
             border: 1px solid rgba(100, 150, 200, 0.5);
@@ -265,6 +251,41 @@
         .btn-tactical:hover {
             transform: scale(1.05);
             box-shadow: 0 0 30px rgba(76, 135, 183, 0.6);
+        }
+
+        .loadout-selector {
+            background: rgba(20, 20, 40, 0.8);
+            border: 2px solid rgba(100, 150, 200, 0.3);
+            transition: all 0.3s;
+        }
+
+        .loadout-selector:hover {
+            border-color: rgba(100, 150, 200, 0.6);
+            box-shadow: 0 0 20px rgba(100, 150, 200, 0.4);
+        }
+
+        .loadout-option {
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .loadout-option:hover {
+            background: rgba(100, 150, 200, 0.2);
+        }
+
+        .loadout-option.active {
+            background: rgba(76, 135, 183, 0.4);
+            border-left: 4px solid #4c87b7;
+        }
+
+        .ability-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 4px;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -297,12 +318,12 @@
                 CHASE
             </h1>
             <p class="text-center text-lg sm:text-xl text-gray-400 mb-8 tracking-wide" style="font-family: 'Orbitron', sans-serif;">
-                COMPLETE GAME RULES & TACTICAL DEPLOYMENT v3.0
+                COMPLETE GAME RULES & TACTICAL DEPLOYMENT v3.5
             </p>
 
             <!-- Share Button -->
             <div class="text-center mb-10">
-                <button onclick="copyLink()" class="btn-tactical text-white font-bold py-3 px-8 rounded-lg transition duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-base tracking-wider">
+                <button onclick="copyLink()" class="btn-tactical text-white font-bold py-3 px-8 rounded-lg transition duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-base tracking-wider sound-enabled">
                     <span>🔗 COPY SHARE LINK</span>
                 </button>
             </div>
@@ -316,16 +337,16 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-300">
                         <!-- Runners Team -->
-                        <div class="piece-card p-5 rounded-lg runners-border border-2">
+                        <div class="piece-card p-5 rounded-lg runners-border border-2 sound-enabled">
                             <h3 id="runners-team-title" class="text-lg font-bold runners-color mb-4 tracking-wide" style="font-family: 'Orbitron', sans-serif;">RUNNERS TEAM: BLUE RUNNERS</h3>
                             <div class="space-y-4">
                                 <div>
                                     <label for="runner-name" class="block text-sm font-medium mb-2 tracking-wide">TEAM NAME:</label>
-                                    <input type="text" id="runner-name" value="BLUE RUNNERS" class="config-input w-full p-2 rounded text-blue-300 uppercase tracking-wider">
+                                    <input type="text" id="runner-name" value="BLUE RUNNERS" class="config-input w-full p-2 rounded text-blue-300 uppercase tracking-wider sound-enabled">
                                 </div>
                                 <div>
                                     <label for="runner-color" class="block text-sm font-medium mb-2 tracking-wide">TEAM COLOR:</label>
-                                    <select id="runner-color" class="config-input w-full p-2 rounded uppercase tracking-wider">
+                                    <select id="runner-color" class="config-input w-full p-2 rounded uppercase tracking-wider sound-enabled">
                                         <option value="blue" selected>BLUE</option>
                                         <option value="black">BLACK</option>
                                         <option value="green">GREEN</option>
@@ -336,16 +357,16 @@
                         </div>
 
                         <!-- Chasers Team -->
-                        <div class="piece-card p-5 rounded-lg chasers-border border-2">
+                        <div class="piece-card p-5 rounded-lg chasers-border border-2 sound-enabled">
                             <h3 id="chasers-team-title" class="text-lg font-bold chasers-color mb-4 tracking-wide" style="font-family: 'Orbitron', sans-serif;">CHASERS TEAM: RED CHASERS</h3>
                             <div class="space-y-4">
                                 <div>
                                     <label for="chaser-name" class="block text-sm font-medium mb-2 tracking-wide">TEAM NAME:</label>
-                                    <input type="text" id="chaser-name" value="RED CHASERS" class="config-input w-full p-2 rounded text-red-300 uppercase tracking-wider">
+                                    <input type="text" id="chaser-name" value="RED CHASERS" class="config-input w-full p-2 rounded text-red-300 uppercase tracking-wider sound-enabled">
                                 </div>
                                 <div>
                                     <label for="chaser-color" class="block text-sm font-medium mb-2 tracking-wide">TEAM COLOR:</label>
-                                    <select id="chaser-color" class="config-input w-full p-2 rounded uppercase tracking-wider">
+                                    <select id="chaser-color" class="config-input w-full p-2 rounded uppercase tracking-wider sound-enabled">
                                         <option value="red" selected>RED</option>
                                         <option value="orange">ORANGE</option>
                                         <option value="white">WHITE</option>
@@ -359,11 +380,11 @@
                     <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
                             <label for="max-days" class="block text-sm font-medium text-gray-400 mb-2 tracking-wide">MAX DAYS:</label>
-                            <input type="number" id="max-days" value="30" min="10" max="100" class="config-input w-full p-2 rounded text-purple-300">
+                            <input type="number" id="max-days" value="30" min="10" max="100" class="config-input w-full p-2 rounded text-purple-300 sound-enabled">
                         </div>
                         <div>
                             <label for="biome-select" class="block text-sm font-medium text-gray-400 mb-2 tracking-wide">BIOME:</label>
-                            <select id="biome-select" class="config-input w-full p-2 rounded text-purple-300 uppercase">
+                            <select id="biome-select" class="config-input w-full p-2 rounded text-purple-300 uppercase sound-enabled">
                                 <option value="forest">FOREST</option>
                                 <option value="desert">DESERT</option>
                                 <option value="ice-desert">ICE DESERT</option>
@@ -374,7 +395,7 @@
                         </div>
                         <div>
                             <label for="balance-mode" class="block text-sm font-medium text-gray-400 mb-2 tracking-wide">BALANCE MODE:</label>
-                            <select id="balance-mode" class="config-input w-full p-2 rounded text-purple-300 uppercase text-xs">
+                            <select id="balance-mode" class="config-input w-full p-2 rounded text-purple-300 uppercase text-xs sound-enabled">
                                 <option value="fair">FAIR PLAY</option>
                                 <option value="runner_handicap">HANDICAP RUNNERS</option>
                                 <option value="chaser_handicap">HANDICAP CHASERS</option>
@@ -383,132 +404,491 @@
                     </div>
                 </section>
 
-                <!-- Game Overview -->
+                <!-- LOADOUT CUSTOMIZATION SECTION -->
                 <section class="tactical-section rounded-xl p-6 backdrop-blur-md" style="background: rgba(20, 20, 35, 0.8);">
-                    <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-400 flex items-center" style="font-family: 'Orbitron', sans-serif;">
-                        <span class="mr-3 text-3xl">🎯</span> MISSION OVERVIEW
+                    <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-amber-400 flex items-center" style="font-family: 'Orbitron', sans-serif;">
+                        <span class="mr-3 text-3xl">🎖️</span> LOADOUT CUSTOMIZATION
                     </h2>
-                    <p class="text-gray-300 mb-4 border-l-4 border-blue-500 pl-4 italic leading-relaxed">
-                        CHASE is an intensely asymmetric strategy board game set on a massive hexagonal battlefield grid. The core conflict pits a small, agile team of <strong>9 RUNNERS</strong> against a large, overwhelming force of <strong>18 CHASERS</strong> over a maximum of 30 in-game days. The runners must execute a precise, long-term escape plan while the chasers leverage superior numbers and firepower for total elimination. Success hinges on resource management, tactical movement, and exploiting unique abilities of each piece type.
-                    </p>
-                    <ul class="list-none text-gray-300 space-y-2 ml-4">
-                        <li class="flex items-center"><span class="mr-3 text-green-400">▸</span><strong>PLAYER COUNT:</strong> 2 players or 2 teams</li>
-                        <li class="flex items-center"><span class="mr-3 text-green-400">▸</span><strong>GAME DURATION:</strong> Maximum 30 days (rounds)</li>
-                        <li class="flex items-center"><span class="mr-3 text-green-400">▸</span><strong>COMPLEXITY:</strong> High strategic depth</li>
-                    </ul>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Runners Loadout -->
+                        <div class="loadout-selector rounded-lg p-5">
+                            <h3 class="text-xl font-bold text-blue-400 mb-4 tracking-wide" style="font-family: 'Orbitron', sans-serif;">
+                                RUNNERS SUPPORT UNIT
+                            </h3>
+                            <p class="text-sm text-gray-400 mb-4">Select support unit (replaces Healer slot):</p>
+                            <div class="space-y-3">
+                                <div class="loadout-option active p-4 rounded border-l-4 border-transparent sound-enabled" onclick="selectLoadout('runner', 'healer')">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="text-2xl mr-3">💚</span>
+                                            <div>
+                                                <div class="font-bold text-pink-400">HEALER</div>
+                                                <div class="text-xs text-gray-400">HP: 4 | Move: 3×1</div>
+                                            </div>
+                                        </div>
+                                        <input type="radio" name="runner-loadout" value="healer" checked class="w-5 h-5">
+                                    </div>
+                                    <div class="mt-2 text-xs text-gray-300">Heals 2 HP to ally, 3-day cooldown</div>
+                                    <span class="ability-tag" style="background: rgba(236, 72, 153, 0.3); color: #f9a8d4;">SUPPORT</span>
+                                </div>
+
+                                <div class="loadout-option p-4 rounded border-l-4 border-transparent sound-enabled" onclick="selectLoadout('runner', 'teleporter')">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="text-2xl mr-3">🌀</span>
+                                            <div>
+                                                <div class="font-bold text-purple-400">TELEPORTER</div>
+                                                <div class="text-xs text-gray-400">HP: 4 | Move: 3×1</div>
+                                            </div>
+                                        </div>
+                                        <input type="radio" name="runner-loadout" value="teleporter" class="w-5 h-5">
+                                    </div>
+                                    <div class="mt-2 text-xs text-gray-300">Teleports ally outside 30-tile radius beside it, 3-day cooldown</div>
+                                    <span class="ability-tag" style="background: rgba(168, 85, 247, 0.3); color: #c084fc;">TACTICAL</span>
+                                </div>
+
+                                <div class="loadout-option p-4 rounded border-l-4 border-transparent sound-enabled" onclick="selectLoadout('runner', 'misfit')">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="text-2xl mr-3">👻</span>
+                                            <div>
+                                                <div class="font-bold text-cyan-400">MISFIT</div>
+                                                <div class="text-xs text-gray-400">HP: 4 | Move: 3×1</div>
+                                            </div>
+                                        </div>
+                                        <input type="radio" name="runner-loadout" value="misfit" class="w-5 h-5">
+                                    </div>
+                                    <div class="mt-2 text-xs text-gray-300">Creates illusion (2 HP, 3-move tanker speed) lasting 4 days, 5-day cooldown</div>
+                                    <span class="ability-tag" style="background: rgba(6, 182, 212, 0.3); color: #67e8f9;">DECEPTION</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chasers Loadout -->
+                        <div class="loadout-selector rounded-lg p-5">
+                            <h3 class="text-xl font-bold text-red-400 mb-4 tracking-wide" style="font-family: 'Orbitron', sans-serif;">
+                                CHASERS SPECIALIST UNIT
+                            </h3>
+                            <p class="text-sm text-gray-400 mb-4">Select specialist (replaces Scout/Sniper/Steady slot):</p>
+                            <div class="space-y-3">
+                                <div class="loadout-option active p-4 rounded border-l-4 border-transparent sound-enabled" onclick="selectLoadout('chaser', 'standard')">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="text-2xl mr-3">🎯</span>
+                                            <div>
+                                                <div class="font-bold text-red-400">STANDARD LOADOUT</div>
+                                                <div class="text-xs text-gray-400">Sniper + Scout + Steady</div>
+                                            </div>
+                                        </div>
+                                        <input type="radio" name="chaser-loadout" value="standard" checked class="w-5 h-5">
+                                    </div>
+                                    <div class="mt-2 text-xs text-gray-300">Default configuration with balanced capabilities</div>
+                                    <span class="ability-tag" style="background: rgba(239, 68, 68, 0.3); color: #fca5a5;">BALANCED</span>
+                                </div>
+
+                                <div class="loadout-option p-4 rounded border-l-4 border-transparent sound-enabled" onclick="selectLoadout('chaser', 'bomber')">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="text-2xl mr-3">💥</span>
+                                            <div>
+                                                <div class="font-bold text-orange-400">BOMBER</div>
+                                                <div class="text-xs text-gray-400">HP: 3 | Move: 3</div>
+                                            </div>
+                                        </div>
+                                        <input type="radio" name="chaser-loadout" value="bomber" class="w-5 h-5">
+                                    </div>
+                                    <div class="mt-2 text-xs text-gray-300">Range: 6 | AoE: 5-tile radius | Damage: 2 HP per target</div>
+                                    <span class="ability-tag" style="background: rgba(249, 115, 22, 0.3); color: #fdba74;">AOE DAMAGE</span>
+                                </div>
+
+                                <div class="loadout-option p-4 rounded border-l-4 border-transparent sound-enabled" onclick="selectLoadout('chaser', 'overseer')">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="text-2xl mr-3">👁️‍🗨️</span>
+                                            <div>
+                                                <div class="font-bold text-yellow-400">OVERSEER</div>
+                                                <div class="text-xs text-gray-400">HP: 3 | Move: 3</div>
+                                            </div>
+                                        </div>
+                                        <input type="radio" name="chaser-loadout" value="overseer" class="w-5 h-5">
+                                    </div>
+                                    <div class="mt-2 text-xs text-gray-300">Lightens 50-tile radius revealing fog, 8-day cooldown | Range: 3 | Damage: 1 HP</div>
+                                    <span class="ability-tag" style="background: rgba(250, 204, 21, 0.3); color: #fde047;">RECON</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
-                <!-- Runners Section -->
-                <section class="tactical-section runners-bg rounded-xl p-6 runners-border border-2 backdrop-blur-md">
-                    <h2 class="text-2xl sm:text-3xl font-bold mb-4 runners-color flex items-center" style="font-family: 'Orbitron', sans-serif;">
-                        <span class="mr-3 text-3xl">🏃</span> <span id="runners-title-pieces">RUNNERS (9 PIECES)</span> - DEPLOYMENT
+                <!-- IN-DEPTH PIECE ANALYSIS SECTION -->
+                <section class="tactical-section rounded-xl p-6 backdrop-blur-md" style="background: rgba(20, 20, 35, 0.8);">
+                    <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-green-400 flex items-center" style="font-family: 'Orbitron', sans-serif;">
+                        <span class="mr-3 text-3xl">📖</span> COMPREHENSIVE PIECE ANALYSIS
                     </h2>
 
-                    <div id="runnerStatBar" class="stat-bar p-4 rounded-lg mb-6 flex flex-col sm:flex-row justify-between items-center text-base font-mono">
-                        <p class="mb-2 sm:mb-0 tracking-wide">TOTAL MAX HP: <span id="runner-hp" class="text-xl font-extrabold text-yellow-300">41 + 6 SHIELD</span></p>
-                        <p class="tracking-wide">TOTAL PIECES: <span id="runner-count" class="text-xl font-extrabold text-yellow-300">9</span> <span id="runner-warning" class="text-red-400 text-sm font-normal ml-2"></span></p>
+                    <!-- Runners Analysis -->
+                    <details class="mb-6 rounded-lg" style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);">
+                        <summary class="text-xl font-bold text-blue-400 sound-enabled" style="font-family: 'Orbitron', sans-serif;">
+                            RUNNERS - DETAILED BREAKDOWN
+                        </summary>
+                        <div class="pt-4 px-4 pb-6 space-y-6">
+                            <!-- Jumper -->
+                            <div class="border-l-4 border-sky-400 pl-4">
+                                <h3 class="text-lg font-bold text-sky-400 mb-2">🦘 JUMPER</h3>
+                                <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                                    <div><strong>HP:</strong> 5</div>
+                                    <div><strong>Movement:</strong> 3×1 tile</div>
+                                    <div><strong>Vision:</strong> 15 tiles</div>
+                                    <div><strong>Role:</strong> Scout/Flanker</div>
+                                </div>
+                                <p class="text-gray-300 text-sm mb-2"><strong>Core Ability:</strong> Can jump over obstacles, ignoring terrain penalties.</p>
+                                <p class="text-gray-400 text-xs mb-2"><strong>Tactical Role:</strong> Jumpers excel at traversing difficult terrain and flanking enemy positions. Use them to bypass chaser formations and create unexpected attack vectors.</p>
+                                <p class="text-gray-400 text-xs mb-2"><strong>Synergies:</strong> Works well with Trapper (draws enemies into trap zones) and Teleporter (emergency extraction from danger zones).</p>
+                                <p class="text-gray-400 text-xs">VContinue<strong>Counters:</strong> Vulnerable to Scout's high mobility and Sniper's long-range fire. Avoid open terrain without support.</p>
+</div>
+                        <!-- Sprinter -->
+                        <div class="border-l-4 border-blue-400 pl-4">
+                            <h3 class="text-lg font-bold text-blue-400 mb-2">🏃 SPRINTER</h3>
+                            <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                                <div><strong>HP:</strong> 5</div>
+                                <div><strong>Movement:</strong> 3×2 tiles (6 total)</div>
+                                <div><strong>Vision:</strong> 15 tiles</div>
+                                <div><strong>Role:</strong> Speed Striker</div>
+                            </div>
+                            <p class="text-gray-300 text-sm mb-2"><strong>Core Ability:</strong> ONLY piece that moves 2 tiles per increment, allowing rapid 6-tile advances.</p>
+                            <p class="text-gray-400 text-xs mb-2"><strong>Tactical Role:</strong> Sprinters are your escape specialists and quick-strike units. Their high mobility allows them to reach exits faster than any other piece or quickly reinforce threatened areas.</p>
+                            <p class="text-gray-400 text-xs mb-2"><strong>Synergies:</strong> Pair with Healer for sustained pushes. Misfit illusions can create confusion about which Sprinter is real.</p>
+                            <p class="text-gray-400 text-xs"><strong>Counters:</strong> High path interception damage risk. Must minimize chaser path crossings. Generals with 6-tile range are major threats.</p>
+                        </div>
+
+                        <!-- Tanker -->
+                        <div class="border-l-4 border-green-400 pl-4">
+                            <h3 class="text-lg font-bold text-green-400 mb-2">🛡️ TANKER</h3>
+                            <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                                <div><strong>HP:</strong> 3</div>
+                                <div><strong>Shield:</strong> 3 (regen to 5)</div>
+                                <div><strong>Movement:</strong> 3×1 tile</div>
+                                <div><strong>Vision:</strong> 15 tiles</div>
+                            </div>
+                            <p class="text-gray-300 text-sm mb-2"><strong>Core Ability:</strong> Shield regenerates +1 per day when damaged (max 5). Absorbs damage before HP.</p>
+                            <p class="text-gray-400 text-xs mb-2"><strong>Tactical Role:</strong> Tankers are your frontline defenders. Position them on high-traffic routes to absorb chaser fire. Shield regeneration makes them self-sustaining in extended engagements.</p>
+                            <p class="text-gray-400 text-xs mb-2"><strong>Synergies:</strong> Critical for protecting Trapper. Works exceptionally well with Healer for maximum survivability.</p>
+                            <p class="text-gray-400 text-xs"><strong>Counters:</strong> President's Debuff Grenade bypasses shield. Generals deal 2 HP which can penetrate shield faster. Must rotate to regenerate.</p>
+                        </div>
+
+                        <!-- Trapper -->
+                        <div class="border-l-4 border-orange-400 pl-4">
+                            <h3 class="text-lg font-bold text-orange-400 mb-2">💣 TRAPPER</h3>
+                            <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                                <div><strong>HP:</strong> 6</div>
+                                <div><strong>Movement:</strong> 3 tiles (flexible)</div>
+                                <div><strong>Vision:</strong> 50 tiles (EXTENDED)</div>
+                                <div><strong>Role:</strong> Area Denial/Intel</div>
+                            </div>
+                            <p class="text-gray-300 text-sm mb-2"><strong>Core Ability:</strong> Lays 3 traps/day (max 15 on board) within 20-tile radius. Movement penalty: -1 tile per trap used. ONLY trap layer.</p>
+                            <p class="text-gray-400 text-xs mb-2"><strong>Tactical Role:</strong> THE MOST CRITICAL RUNNER PIECE. Trapper controls battlefield flow and provides extended reconnaissance with 50-tile vision. Losing Trapper removes all trap capabilities.</p>
+                            <p class="text-gray-400 text-xs mb-2"><strong>Trap Types:</strong> Spike (2 HP), Stun (1 HP + lose turn), Slow (1 HP + half speed). Create trap corridors to funnel chasers into kill zones.</p>
+                            <p class="text-gray-400 text-xs mb-2"><strong>Synergies:</strong> MUST be protected by Tankers. Teleporter can emergency extract. Extended vision coordinates team movements.</p>
+                            <p class="text-gray-400 text-xs"><strong>Counters:</strong> Scout is trap-immune and can find Trapper safely. President's Malware debuff reveals traps. Primary target for all chasers.</p>
+                        </div>
+
+                        <!-- Support Units -->
+                        <div class="border-l-4 border-pink-400 pl-4">
+                            <h3 class="text-lg font-bold text-pink-400 mb-3">SUPPORT UNITS (Choose 1)</h3>
+                            
+                            <div class="mb-4">
+                                <h4 class="text-md font-bold text-pink-400">💚 HEALER</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm mb-2">
+                                    <div><strong>HP:</strong> 4</div>
+                                    <div><strong>Movement:</strong> 3×1 tile</div>
+                                </div>
+                                <p class="text-gray-300 text-sm mb-1"><strong>Ability:</strong> Heals 2 HP to ally, 3-day cooldown.</p>
+                                <p class="text-gray-400 text-xs mb-1"><strong>Role:</strong> Sustain specialist. Best for defensive, grinding strategies. Keeps Tankers at full effectiveness.</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h4 class="text-md font-bold text-purple-400">🌀 TELEPORTER</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm mb-2">
+                                    <div><strong>HP:</strong> 4</div>
+                                    <div><strong>Movement:</strong> 3×1 tile</div>
+                                </div>
+                                <p class="text-gray-300 text-sm mb-1"><strong>Ability:</strong> Teleports ally outside 30-tile radius beside it, 3-day cooldown.</p>
+                                <p class="text-gray-400 text-xs mb-1"><strong>Role:</strong> Tactical repositioning. Enables bait-and-switch plays. Can save Trapper or extract injured pieces.</p>
+                                <p class="text-gray-400 text-xs mb-1"><strong>Advanced Tactic:</strong> Use Sprinter as bait deep in enemy territory, teleport back for emergency extraction.</p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-md font-bold text-cyan-400">👻 MISFIT</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm mb-2">
+                                    <div><strong>HP:</strong> 4</div>
+                                    <div><strong>Movement:</strong> 3×1 tile</div>
+                                </div>
+                                <p class="text-gray-300 text-sm mb-1"><strong>Ability:</strong> Creates illusion (2 HP, 3-move tanker speed) lasting 4 days, 5-day cooldown.</p>
+                                <p class="text-gray-400 text-xs mb-1"><strong>Role:</strong> Deception warfare. Forces chasers to waste attacks and movement on fake targets.</p>
+                                <p class="text-gray-400 text-xs"><strong>Advanced Tactic:</strong> Deploy illusions near exits to split chaser attention. Illusion can absorb President's Debuff Grenade.</p>
+                            </div>
+                        </div>
                     </div>
+                </details>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="runner-pieces">
-                        <div class="piece-card p-4 rounded-lg">
-                            <h3 class="text-lg font-bold text-sky-400 mb-2 flex items-center justify-between">
-                                <span class="flex items-center"><span class="mr-2">🦘</span> JUMPER (HP: 5)<span class="fog-indicator" title="Vision: 15 tiles"></span></span>
-                                <input type="number" id="jumper" value="3" min="0" max="9" data-hp="5" data-shield="0" class="w-16 piece-input text-center rounded text-base text-sky-300">
-                            </h3>
-                            <p class="text-sm text-gray-300">MOVE: 3×1 tile</p>
-                            <p class="text-xs text-gray-400 mt-1">Jump obstacles | Vision: 15 tiles</p>
+                <!-- Chasers Analysis -->
+                <details class="rounded-lg" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3);">
+                    <summary class="text-xl font-bold text-red-400 sound-enabled" style="font-family: 'Orbitron', sans-serif;">
+                        CHASERS - DETAILED BREAKDOWN
+                    </summary>
+                    <div class="pt-4 px-4 pb-6 space-y-6">
+                        <!-- Soldier -->
+                        <div class="border-l-4 border-gray-400 pl-4">
+                            <h3 class="text-lg font-bold text-gray-300 mb-2">⚔️ SOLDIER</h3>
+                            <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                                <div><strong>HP:</strong> 2</div>
+                                <div><strong>Movement:</strong> 2 tiles</div>
+                                <div><strong>Range:</strong> 4 tiles</div>
+                                <div><strong>Damage:</strong> 1 HP</div>
+                            </div>
+                            <p class="text-gray-300 text-sm mb-2"><strong>Core Role:</strong> Frontline infantry and perimeter control. Your most numerous unit (10 total).</p>
+                            <p class="text-gray-400 text-xs mb-2"><strong>Tactical Role:</strong> Soldiers form the outer containment ring and create interception zones. Position them to create overlapping 4-tile firing ranges for maximum coverage.</p>
+                            <p class="text-gray-400 text-xs mb-2"><strong>Synergies:</strong> Work best in groups of 3-4. Coordinate with Generals for layered defense. Use to trigger traps before valuable pieces advance.</p>
+                            <p class="text-gray-400 text-xs"><strong>Weakness:</strong> Low HP (2) means they die easily to traps. Expendable but valuable in numbers.</p>
                         </div>
-                        <div class="piece-card p-4 rounded-lg">
-                            <h3 class="text-lg font-bold text-blue-400 mb-2 flex items-center justify-between">
-                                <span class="flex items-center"><span class="mr-2">🏃</span> SPRINTER (HP: 5)<span class="fog-indicator" title="Vision: 15 tiles"></span></span>
-                                <input type="number" id="sprinter" value="2" min="0" max="9" data-hp="5" data-shield="0" class="w-16 piece-input text-center rounded text-base text-blue-300">
-                            </h3>
-                            <p class="text-sm text-gray-300">MOVE: 3×2 tiles</p>
-                            <p class="text-xs text-gray-400 mt-1">2-tile increments | Vision: 15 tiles</p>
+
+                        <!-- General -->
+                        <div class="border-l-4 border-yellow-400 pl-4">
+                            <h3 class="text-lg font-bold text-yellow-400 mb-2">👑 GENERAL</h3>
+                            <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                                <div><strong>HP:</strong> 3</div>
+                                <div><strong>Movement:</strong> 3 tiles</div>
+                                <div><strong>Range:</strong> 6 tiles</div>
+                                <div><strong>Damage:</strong> 2 HP</div>
+                            </div>
+                            <p class="text-gray-300 text-sm mb-2"><strong>Core Role:</strong> Mid-range heavy hitters and exit guards.</p>
+                            <p class="text-gray-400 text-xs mb-2"><strong>Tactical Role:</strong> Generals are your command pieces. 6-tile range matches Sprinter max movement, allowing interception. 2 HP damage penetrates Tanker shields effectively.</p>
+                            <p class="text-gray-400 text-xs mb-2"><strong>Synergies:</strong> Position around exits (5+ tiles away). Coordinate fire with Sniper for high-value target elimination. 12-tile vision for decent recon.</p>
+                            <p class="text-gray-400 text-xs"><strong>Tactical Note:</strong> Can chase Sprinters effectively with 3-move, 6-range combo. Priority targets: Trapper, Healer/Support.</p>
                         </div>
-                        <div class="piece-card p-4 rounded-lg">
-                            <h3 class="text-lg font-bold text-green-400 mb-2 flex items-center justify-between">
-                                <span class="flex items-center"><span class="mr-2">🛡️</span> TANKER (HP: 3)<span class="fog-indicator" title="Vision: 15 tiles"></span></span>
-                                <input type="number" id="tanker" value="2" min="0" max="9" data-hp="3" data-shield="3" class="w-16 piece-input text-center rounded text-base text-green-300">
-                            </h3>
-                            <p class="text-sm text-gray-300">SHIELD: 3 | MOVE: 3×1</p>
-                            <p class="text-xs text-gray-400 mt-1">Regen +1 shield/day | Vision: 15 tiles</p>
+
+                        <!-- Specialist Units -->
+                        <div class="border-l-4 border-red-400 pl-4">
+                            <h3 class="text-lg font-bold text-red-400 mb-3">SPECIALIST UNITS (Choose Loadout)</h3>
+                            
+                            <div class="mb-4">
+                                <h4 class="text-md font-bold text-red-400">🎯 SNIPER</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm mb-2">
+                                    <div><strong>HP:</strong> 3</div>
+                                    <div><strong>Movement:</strong> 2 tiles</div>
+                                    <div><strong>Range:</strong> 10 tiles</div>
+                                    <div><strong>Vision:</strong> 30 tiles</div>
+                                </div>
+                                <p class="text-gray-300 text-sm mb-1"><strong>Ability:</strong> Shoots through obstacles. 2 HP damage.</p>
+                                <p class="text-gray-400 text-xs mb-1"><strong>Role:</strong> Long-range anti-material. 30-tile vision provides strategic intelligence. Can eliminate runners hiding behind terrain.</p>
+                                <p class="text-gray-400 text-xs"><strong>Positioning:</strong> Place on high ground or central positions with clear sightlines. Slow (2-move) means repositioning is costly.</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h4 class="text-md font-bold text-cyan-400">🗿 STEADY</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm mb-2">
+                                    <div><strong>HP:</strong> 3</div>
+                                    <div><strong>Movement:</strong> 3 tiles</div>
+                                    <div><strong>Range:</strong> 3 tiles</div>
+                                    <div><strong>Damage:</strong> 1 HP</div>
+                                </div>
+                                <p class="text-gray-300 text-sm mb-1"><strong>Ability:</strong> Immune to knockback. Regenerates 1 HP/day if not damaged.</p>
+                                <p class="text-gray-400 text-xs mb-1"><strong>Role:</strong> Anchor piece. Self-sustaining in prolonged engagements. Use for exit defense or chokepoint holding.</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h4 class="text-md font-bold text-purple-400">👁️ SCOUT</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm mb-2">
+                                    <div><strong>HP:</strong> 3</div>
+                                    <div><strong>Movement:</strong> 8 tiles</div>
+                                    <div><strong>Range:</strong> 3 tiles</div>
+                                    <div><strong>Vision:</strong> 20 tiles</div>
+                                </div>
+                                <p class="text-gray-300 text-sm mb-1"><strong>Ability:</strong> Trap immune. Highest movement (8 tiles).</p>
+                                <p class="text-gray-400 text-xs mb-1"><strong>Role:</strong> Reconnaissance and trap detection. Can safely advance through mined areas. Use to hunt Trapper.</p>
+                                <p class="text-gray-400 text-xs"><strong>Critical:</strong> Only piece that can safely probe trap networks. Essential for countering Trapper-heavy strategies.</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h4 class="text-md font-bold text-orange-400">💥 BOMBER (Alternative)</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm mb-2">
+                                    <div><strong>HP:</strong> 3</div>
+                                    <div><strong>Movement:</strong> 3 tiles</div>
+                                    <div><strong>Range:</strong> 6 tiles</div>
+                                    <div><strong>AoE:</strong> 5-tile radius</div>
+                                </div>
+                                <p class="text-gray-300 text-sm mb-1"><strong>Ability:</strong> Area-of-Effect damage. 2 HP to all targets in 5-tile radius.</p>
+                                <p class="text-gray-400 text-xs mb-1"><strong>Role:</strong> Anti-cluster specialist. Devastating against grouped runners. Replaces one of: Sniper/Scout/Steady.</p>
+                                <p class="text-gray-400 text-xs"><strong>Best Against:</strong> Runners who group for Healer support or around Trapper. Can hit multiple targets per shot.</p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-md font-bold text-yellow-400">👁️‍🗨️ OVERSEER (Alternative)</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm mb-2">
+                                    <div><strong>HP:</strong> 3</div>
+                                    <div><strong>Movement:</strong> 3 tiles</div>
+                                    <div><strong>Range:</strong> 3 tiles</div>
+                                    <div><strong>Damage:</strong> 1 HP</div>
+                                </div>
+                                <p class="text-gray-300 text-sm mb-1"><strong>Ability:</strong> Reveals 50-tile radius (removes fog of war), 8-day cooldown.</p>
+                                <p class="text-gray-400 text-xs mb-1"><strong>Role:</strong> Strategic intelligence. Reveals runner positions and trap locations in massive area. Replaces one of: Sniper/Scout/Steady.</p>
+                                <p class="text-gray-400 text-xs"><strong>Best Use:</strong> Mid-game intelligence gathering. Counters Trapper's 50-tile vision advantage. Reveals hidden escape routes.</p>
+                            </div>
                         </div>
-                        <div class="piece-card p-4 rounded-lg">
-                            <h3 class="text-lg font-bold text-orange-400 mb-2 flex items-center justify-between">
-                                <span class="flex items-center"><span class="mr-2">💣</span> TRAPPER (HP: 6)<span class="fog-indicator" title="Vision: 50 tiles" style="background: radial-gradient(circle, rgba(255, 150, 0, 0.9), rgba(150, 75, 0, 0.3)); box-shadow: 0 0 12px rgba(255, 150, 0, 0.8);"></span></span>
-                                <input type="number" id="trapper" value="1" min="1" max="1" data-hp="6" data-shield="0" class="w-16 piece-input text-center rounded text-base text-orange-300 bg-gray-700" disabled>
-                            </h3>
-                            <p class="text-sm text-gray-300">MOVE: 3 tiles</p>
-                            <p class="text-xs text-gray-400 mt-1">3 traps/day (max 15) | Vision: 50 tiles</p>
-                        </div>
-                        <div class="piece-card p-4 rounded-lg">
-                            <h3 class="text-lg font-bold text-pink-400 mb-2 flex items-center justify-between">
-                                <span class="flex items-center"><span class="mr-2">💚</span> HEALER (HP: 4)<span class="fog-indicator" title="Vision: 15 tiles"></span></span>
-                                <input type="number" id="healer" value="1" min="1" max="1" data-hp="4" data-shield="0" class="w-16 piece-input text-center rounded text-base text-pink-300 bg-gray-700" disabled>
-                            </h3>
-                            <p class="text-sm text-gray-300">MOVE: 3×1 tile</p>
-                            <p class="text-xs text-gray-400 mt-1">Heal 2 HP, 3-day CD | Vision: 15 tiles</p>
+
+                        <!-- President -->
+                        <div class="border-l-4 border-amber-400 pl-4">
+                            <h3 class="text-lg font-bold text-amber-400 mb-2">🎖️ PRESIDENT</h3>
+                            <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                                <div><strong>HP:</strong> 4</div>
+                                <div><strong>Movement:</strong> 2 tiles</div>
+                                <div><strong>Range:</strong> 3 tiles (standard)</div>
+                                <div><strong>Vision:</strong> 10 tiles</div>
+                            </div>
+                            <p class="text-gray-300 text-sm mb-2"><strong>Special Item:</strong> DEBUFF GRENADE - 7-tile range, 1 HP damage + random debuff, 7-day cooldown.</p>
+                            <p class="text-gray-400 text-xs mb-2"><strong>Debuff Effects (1d6):</strong></p>
+                            <ul class="text-xs text-gray-400 list-disc list-inside ml-4 mb-2">
+                                <li>Cripple: 50% movement next day</li>
+                                <li>Stun: Cannot act next day</li>
+                                <li>Poison: 1 HP/day for 3 days (stops at 1 HP)</li>
+                                <li>Malware: Reveals 1-2 trap locations to all chasers</li>
+                                <li>Weakness: +1 HP damage received for entire turn</li>
+                                <li>Exhaustion: -1 tile movement for 2 days</li>
+                            </ul>
+                            <p class="text-gray-400 text-xs mb-2"><strong>Tactical Role:</strong> High-value target disruptor. 7-day cooldown means timing is critical. Best used on Trapper, Healer/Support, or runners near exits.</p>
+                            <p class="text-gray-400 text-xs"><strong>Anti-Shield:</strong> Tanker shields block 1 HP damage but NOT the debuff effect. Malware is devastating against trap-heavy strategies.</p>
                         </div>
                     </div>
-                    <p class="mt-4 text-sm text-gray-400 italic font-mono tracking-wide">
-                        TOTAL: <strong class="text-yellow-300">41 HP + 6 SHIELD (47 EFFECTIVE HP)</strong> | AVG MOVEMENT: 4.1 tiles/day
-                    </p>
-                </section>
+                </details>
+            </section>
 
-                <!-- Chasers Section -->
-                <section class="tactical-section chasers-bg rounded-xl p-6 chasers-border border-2 backdrop-blur-md">
-                    <h2 class="text-2xl sm:text-3xl font-bold mb-4 chasers-color flex items-center" style="font-family: 'Orbitron', sans-serif;">
-                        <span class="mr-3 text-3xl">⚔️</span> <span id="chasers-title-pieces">CHASERS (18 PIECES)</span> - DEPLOYMENT
-                    </h2>
+            <!-- Game Overview -->
+            <section class="tactical-section rounded-xl p-6 backdrop-blur-md" style="background: rgba(20, 20, 35, 0.8);">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-blue-400 flex items-center" style="font-family: 'Orbitron', sans-serif;">
+                    <span class="mr-3 text-3xl">🎯</span> MISSION OVERVIEW
+                </h2>
+                <p class="text-gray-300 mb-4 border-l-4 border-blue-500 pl-4 italic leading-relaxed">
+                    CHASE is an intensely asymmetric strategy board game set on a massive hexagonal battlefield grid. The core conflict pits a small, agile team of <strong>9 RUNNERS</strong> against a large, overwhelming force of <strong>18 CHASERS</strong> over a maximum of 30 in-game days. The runners must execute a precise, long-term escape plan while the chasers leverage superior numbers and firepower for total elimination. Success hinges on resource management, tactical movement, and exploiting unique abilities of each piece type.
+                </p>
+                <ul class="list-none text-gray-300 space-y-2 ml-4">
+                    <li class="flex items-center sound-enabled"><span class="mr-3 text-green-400">▸</span><strong>PLAYER COUNT:</strong> 2 players or 2 teams</li>
+                    <li class="flex items-center sound-enabled"><span class="mr-3 text-green-400">▸</span><strong>GAME DURATION:</strong> Maximum 30 days (rounds)</li>
+                    <li class="flex items-center sound-enabled"><span class="mr-3 text-green-400">▸</span><strong>COMPLEXITY:</strong> High strategic depth</li>
+                </ul>
+            </section>
 
-                    <div id="chaserStatBar" class="stat-bar p-4 rounded-lg mb-6 flex flex-col sm:flex-row justify-between items-center text-base font-mono">
-                        <p class="mb-2 sm:mb-0 tracking-wide">TOTAL MAX HP: <span id="chaser-hp" class="text-xl font-extrabold text-yellow-300">45</span></p>
-                        <p class="tracking-wide">TOTAL PIECES: <span id="chaser-count" class="text-xl font-extrabold text-yellow-300">18</span> <span id="chaser-warning" class="text-red-400 text-sm font-normal ml-2"></span></p>
+            <!-- Runners Section -->
+            <section class="tactical-section runners-bg rounded-xl p-6 runners-border border-2 backdrop-blur-md">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-4 runners-color flex items-center" style="font-family: 'Orbitron', sans-serif;">
+                    <span class="mr-3 text-3xl">🏃</span> <span id="runners-title-pieces">RUNNERS (9 PIECES)</span> - DEPLOYMENT
+                </h2>
+
+                <div id="runnerStatBar" class="stat-bar p-4 rounded-lg mb-6 flex flex-col sm:flex-row justify-between items-center text-base font-mono">
+                    <p class="mb-2 sm:mb-0 tracking-wide">TOTAL MAX HP: <span id="runner-hp" class="text-xl font-extrabold text-yellow-300">41 + 6 SHIELD</span></p>
+                    <p class="tracking-wide">TOTAL PIECES: <span id="runner-count" class="text-xl font-extrabold text-yellow-300">9</span> <span id="runner-warning" class="text-red-400 text-sm font-normal ml-2"></span></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="runner-pieces">
+                    <div class="piece-card p-4 rounded-lg sound-enabled">
+                        <h3 class="text-lg font-bold text-sky-400 mb-2 flex items-center justify-between">
+                            <span class="flex items-center"><span class="mr-2">🦘</span> JUMPER (HP: 5)<span class="fog-indicator" title="Vision: 15 tiles"></span></span>
+                            <input type="number" id="jumper" value="3" min="0" max="9" data-hp="5" data-shield="0" class="w-16 piece-input text-center rounded text-base text-sky-300 sound-enabled">
+                        </h3>
+                        <p class="text-sm text-gray-300">MOVE: 3×1 tile</p>
+                        <p class="text-xs text-gray-400 mt-1">Jump obstacles | Vision: 15 tiles</p>
                     </div>
+                    <div class="piece-card p-4 rounded-lg sound-enabled">
+                        <h3 class="text-lg font-bold text-blue-400 mb-2 flex items-center justify-between">
+                            <span class="flex items-center"><span class="mr-2">🏃</span> SPRINTER (HP: 5)<span class="fog-indicator" title="Vision: 15 tiles"></span></span>
+                            <input type="number" id="sprinter" value="2" min="0" max="9" data-hp="5" data-shield="0" class="w-16 piece-input text-center rounded text-base text-blue-300 sound-enabled">
+                        </h3>
+                        <p class="text-sm text-gray-300">MOVE: 3×2 tiles</p>
+                        <p class="text-xs text-gray-400 mt-1">2-tile increments | Vision: 15 tiles</p>
+                    </div>
+                    <div class="piece-card p-4 rounded-lg sound-enabled">
+                        <h3 class="text-lg font-bold text-green-400 mb-2 flex items-center justify-between">
+                            <span class="flex items-center"><span class="mr-2">🛡️</span> TANKER (HP: 3)<span class="fog-indicator" title="Vision: 15 tiles"></span></span>
+                            <input type="number" id="tanker" value="2" min="0" max="9" data-hp="3" data-shield="3" class="w-16 piece-input text-center rounded text-base text-green-300 sound-enabled">
+                        </h3>
+                        <p class="text-sm text-gray-300">SHIELD: 3 | MOVE: 3×1</p>
+                        <p class="text-xs text-gray-400 mt-1">Regen +1 shield/day | Vision: 15 tiles</p>
+                    </div>
+                    <div class="piece-card p-4 rounded-lg sound-enabled">
+                        <h3 class="text-lg font-bold text-orange-400 mb-2 flex items-center justify-between">
+                            <span class="flex items-center"><span class="mr-2">💣</span> TRAPPER (HP: 6)<span class="fog-indicator" title="Vision: 50 tiles" style="background: radial-gradient(circle, rgba(255, 150, 0, 0.9), rgba(150, 75, 0, 0.3)); box-shadow: 0 0 12px rgba(255, 150, 0, 0.8);"></span></span>
+                            <input type="number" id="trapper" value="1" min="1" max="1" data-hp="6" data-shield="0" class="w-16 piece-input text-center rounded text-base text-orange-300 bg-gray-700" disabled>
+                        </h3>
+                        <p class="text-sm text-gray-300">MOVE: 3 tiles</p>
+                        <p class="text-xs text-gray-400 mt-1">3 traps/day (max 15) | Vision: 50 tiles</p>
+                    </div>
+                    <div class="piece-card p-4 rounded-lg sound-enabled" id="support-unit-card">
+                        <h3 class="text-lg font-bold text-pink-400 mb-2 flex items-center justify-between">
+                            <span class="flex items-center"><span class="mr-2" id="support-icon">💚</span> <span id="support-name">HEALER</span> (HP: 4)<span class="fog-indicator" title="Vision: 15 tiles"></span></span>
+                            <input type="number" id="support" value="1" min="1" max="1" data-hp="4" data-shield="0" class="w-16 piece-input text-center rounded text-base text-pink-300 bg-gray-700" disabled>
+                        </h3>
+                        <p class="text-sm text-gray-300">MOVE: 3×1 tile</p>
+                        <p class="text-xs text-gray-400 mt-1" id="support-ability">Heal 2 HP, 3-day CD | Vision: 15 tiles</p>
+                    </div>
+                </div>
+                <p class="mt-4 text-sm text-gray-400 italic font-mono tracking-wide">
+                    TOTAL: <strong class="text-yellow-300">41 HP + 6 SHIELD (47 EFFECTIVE HP)</strong> | AVG MOVEMENT: 4.1 tiles/day
+                </p>
+            </section>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="chaser-pieces">
-                        <div class="piece-card p-4 rounded-lg">
-                            <h3 class="text-lg font-bold text-gray-300 mb-2 flex items-center justify-between">
-                                <span class="flex items-center"><span class="mr-2">⚔️</span> SOLDIER (HP: 2)<span class="fog-indicator" title="Vision: 10 tiles"></span></span>
-                                <input type="number" id="soldier" value="10" min="0" max="18" data-hp="2" class="w-16 piece-input text-center rounded text-base text-gray-300">
-                            </h3>
-                            <p class="text-sm text-gray-300">MOVE: 2 | RANGE: 4 | DMG: 1</p>
-                            <p class="text-xs text-gray-400 mt-1">Vision: 10 tiles</p>
-                        </div>
-                        <div class="piece-card p-4 rounded-lg">
-                            <h3 class="text-lg font-bold text-yellow-400 mb-2 flex items-center justify-between">
-                                <span class="flex items-center"><span class="mr-2">👑</span> GENERAL (HP: 3)<span class="fog-indicator" title="Vision: 12 tiles" style="background: radial-gradient(circle, rgba(255, 200, 0, 0.9), rgba(150, 120, 0, 0.3)); box-shadow: 0 0 12px rgba(255, 200, 0, 0.7);"></span></span>
-                                <input type="number" id="general" value="4" min="0" max="18" data-hp="3" class="w-16 piece-input text-center rounded text-base text-yellow-300">
-                            </h3>
-                            <p class="text-sm text-gray-300">MOVE: 3 | RANGE: 6 | DMG: 2</p>
-                            <p class="text-xs text-gray-400 mt-1">Vision: 12 tiles</p>
-                        </div>
-                        <div class="piece-card p-4VContinuerounded-lg">
+            <!-- Chasers Section -->
+            <section class="tactical-section chasers-bg rounded-xl p-6 chasers-border border-2 backdrop-blur-md">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-4 chasers-color flex items-center" style="font-family: 'Orbitron', sans-serif;">
+                    <span class="mr-3 text-3xl">⚔️</span> <span id="chasers-title-pieces">CHASERS (18 PIECES)</span> - DEPLOYMENT
+                </h2>
+
+                <div id="chaserStatBar" class="stat-bar p-4 rounded-lg mb-6 flex flex-col sm:flex-row justify-between items-center text-base font-mono">
+                    <p class="mb-2 sm:mb-0 tracking-wide">TOTAL MAX HP: <span id="chaser-hp" class="text-xl font-extrabold text-yellow-300">45</span></p>
+                    <p class="tracking-wide">TOTAL PIECES: <span id="chaser-count" class="text-xl font-extrabold text-yellow-300">18</span> <span id="chaser-warning" class="text-red-400 text-sm font-normal ml-2"></span></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="chaser-pieces">
+                    <div class="piece-card p-4 rounded-lg sound-enabled">
+                        <h3 class="text-lg font-bold text-gray-300 mb-2 flex items-center justify-between">
+                            <span class="flex items-center"><span class="mr-2">⚔️</span> SOLDIER (HP: 2)<span class="fog-indicator" title="Vision: 10VContinuetiles"></span></span>
+<input type="number" id="soldier" value="10" min="0" max="18" data-hp="2" class="w-16 piece-input text-center rounded text-base text-gray-300 sound-enabled">
+</h3>
+<p class="text-sm text-gray-300">MOVE: 2 | RANGE: 4 | DMG: 1</p>
+<p class="text-xs text-gray-400 mt-1">Vision: 10 tiles</p>
+</div>
+<div class="piece-card p-4 rounded-lg sound-enabled">
+<h3 class="text-lg font-bold text-yellow-400 mb-2 flex items-center justify-between">
+<span class="flex items-center"><span class="mr-2">👑</span> GENERAL (HP: 3)<span class="fog-indicator" title="Vision: 12 tiles" style="background: radial-gradient(circle, rgba(255, 200, 0, 0.9), rgba(150, 120, 0, 0.3)); box-shadow: 0 0 12px rgba(255, 200, 0, 0.7);"></span></span>
+<input type="number" id="general" value="4" min="0" max="18" data-hp="3" class="w-16 piece-input text-center rounded text-base text-yellow-300 sound-enabled">
+</h3>
+<p class="text-sm text-gray-300">MOVE: 3 | RANGE: 6 | DMG: 2</p>
+<p class="text-xs text-gray-400 mt-1">Vision: 12 tiles</p>
+</div>
+<div class="piece-card p-4 rounded-lg sound-enabled" id="specialist-card-1">
 <h3 class="text-lg font-bold text-red-400 mb-2 flex items-center justify-between">
-<span class="flex items-center"><span class="mr-2">🎯</span> SNIPER (HP: 3)<span class="fog-indicator" title="Vision: 30 tiles" style="background: radial-gradient(circle, rgba(255, 50, 50, 0.9), rgba(150, 25, 25, 0.3)); box-shadow: 0 0 15px rgba(255, 50, 50, 0.8);"></span></span>
-<input type="number" id="sniper" value="1" min="1" max="1" data-hp="3" class="w-16 piece-input text-center rounded text-base text-red-300 bg-gray-700" disabled>
+<span class="flex items-center"><span class="mr-2" id="spec1-icon">🎯</span> <span id="spec1-name">SNIPER</span> (HP: 3)<span class="fog-indicator" title="Vision: 30 tiles" style="background: radial-gradient(circle, rgba(255, 50, 50, 0.9), rgba(150, 25, 25, 0.3)); box-shadow: 0 0 15px rgba(255, 50, 50, 0.8);"></span></span>
+<input type="number" id="specialist1" value="1" min="1" max="1" data-hp="3" class="w-16 piece-input text-center rounded text-base text-red-300 bg-gray-700" disabled>
 </h3>
-<p class="text-sm text-gray-300">MOVE: 2 | RANGE: 10 | DMG: 2</p>
-<p class="text-xs text-gray-400 mt-1">Shoot through obstacles | Vision: 30 tiles</p>
+<p class="text-sm text-gray-300" id="spec1-stats">MOVE: 2 | RANGE: 10 | DMG: 2</p>
+<p class="text-xs text-gray-400 mt-1" id="spec1-ability">Shoot through obstacles | Vision: 30 tiles</p>
 </div>
-<div class="piece-card p-4 rounded-lg">
+<div class="piece-card p-4 rounded-lg sound-enabled" id="specialist-card-2">
 <h3 class="text-lg font-bold text-cyan-400 mb-2 flex items-center justify-between">
-<span class="flex items-center"><span class="mr-2">🗿</span> STEADY (HP: 3)<span class="fog-indicator" title="Vision: 10 tiles"></span></span>
-<input type="number" id="steady" value="1" min="1" max="1" data-hp="3" class="w-16 piece-input text-center rounded text-base text-cyan-300 bg-gray-700" disabled>
+<span class="flex items-center"><span class="mr-2" id="spec2-icon">🗿</span> <span id="spec2-name">STEADY</span> (HP: 3)<span class="fog-indicator" title="Vision: 10 tiles"></span></span>
+<input type="number" id="specialist2" value="1" min="1" max="1" data-hp="3" class="w-16 piece-input text-center rounded text-base text-cyan-300 bg-gray-700" disabled>
 </h3>
-<p class="text-sm text-gray-300">MOVE: 3 | RANGE: 3 | DMG: 1</p>
-<p class="text-xs text-gray-400 mt-1">Regen 1HP/day | Vision: 10 tiles</p>
+<p class="text-sm text-gray-300" id="spec2-stats">MOVE: 3 | RANGE: 3 | DMG: 1</p>
+<p class="text-xs text-gray-400 mt-1" id="spec2-ability">Regen 1HP/day | Vision: 10 tiles</p>
 </div>
-<div class="piece-card p-4 rounded-lg">
+<div class="piece-card p-4 rounded-lg sound-enabled" id="specialist-card-3">
 <h3 class="text-lg font-bold text-purple-400 mb-2 flex items-center justify-between">
-<span class="flex items-center"><span class="mr-2">👁️</span> SCOUT (HP: 3)<span class="fog-indicator" title="Vision: 20 tiles" style="background: radial-gradient(circle, rgba(150, 100, 255, 0.9), rgba(75, 50, 150, 0.3)); box-shadow: 0 0 13px rgba(150, 100, 255, 0.7);"></span></span>
-<input type="number" id="scout" value="1" min="1" max="1" data-hp="3" class="w-16 piece-input text-center rounded text-base text-purple-300 bg-gray-700" disabled>
+<span class="flex items-center"><span class="mr-2" id="spec3-icon">👁️</span> <span id="spec3-name">SCOUT</span> (HP: 3)<span class="fog-indicator" title="Vision: 20 tiles" style="background: radial-gradient(circle, rgba(150, 100, 255, 0.9), rgba(75, 50, 150, 0.3)); box-shadow: 0 0 13px rgba(150, 100, 255, 0.7);"></span></span>
+<input type="number" id="specialist3" value="1" min="1" max="1" data-hp="3" class="w-16 piece-input text-center rounded text-base text-purple-300 bg-gray-700" disabled>
 </h3>
-<p class="text-sm text-gray-300">MOVE: 8 | RANGE: 3 | DMG: 1</p>
-<p class="text-xs text-gray-400 mt-1">Trap immune | Vision: 20 tiles</p>
+<p class="text-sm text-gray-300" id="spec3-stats">MOVE: 8 | RANGE: 3 | DMG: 1</p>
+<p class="text-xs text-gray-400 mt-1" id="spec3-ability">Trap immune | Vision: 20 tiles</p>
 </div>
-<div class="piece-card p-4 rounded-lg">
+<div class="piece-card p-4 rounded-lg sound-enabled">
 <h3 class="text-lg font-bold text-amber-400 mb-2 flex items-center justify-between">
 <span class="flex items-center"><span class="mr-2">🎖️</span> PRESIDENT (HP: 4)<span class="fog-indicator" title="Vision: 10 tiles"></span></span>
 <input type="number" id="president" value="1" min="1" max="1" data-hp="4" class="w-16 piece-input text-center rounded text-base text-amber-300 bg-gray-700" disabled>
@@ -521,10 +901,10 @@
 TOTAL: <strong class="text-yellow-300">45 HP</strong> | AVG MOVEMENT: 2.7 tiles/day
 </p>
 </section>
-            <!-- Collapsible Rules -->
+            <!-- Collapsible Rules (continuing from before) -->
             <div class="space-y-4">
                 <details class="tactical-section rounded-xl p-4 backdrop-blur-md" style="background: rgba(20, 20, 35, 0.8);">
-                    <summary class="text-xl sm:text-2xl font-bold text-cyan-400 flex items-center" style="font-family: 'Orbitron', sans-serif;">
+                    <summary class="text-xl sm:text-2xl font-bold text-cyan-400 flex items-center sound-enabled" style="font-family: 'Orbitron', sans-serif;">
                         <span class="mr-2 text-2xl">🗺️</span> MAP GENERATION & FOG OF WAR
                     </summary>
                     <div class="pt-4 space-y-4 text-gray-300">
@@ -548,7 +928,7 @@ TOTAL: <strong class="text-yellow-300">45 HP</strong> | AVG MOVEMENT: 2.7 tiles/
                 </details>
 
                 <details class="tactical-section rounded-xl p-4 backdrop-blur-md" style="background: rgba(20, 20, 35, 0.8);">
-                    <summary class="text-xl sm:text-2xl font-bold text-yellow-400 flex items-center" style="font-family: 'Orbitron', sans-serif;">
+                    <summary class="text-xl sm:text-2xl font-bold text-yellow-400 flex items-center sound-enabled" style="font-family: 'Orbitron', sans-serif;">
                         <span class="mr-2 text-2xl">🏆</span> WIN CONDITIONS
                     </summary>
                     <div class="pt-4 grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-300">
@@ -570,7 +950,7 @@ TOTAL: <strong class="text-yellow-300">45 HP</strong> | AVG MOVEMENT: 2.7 tiles/
                 </details>
 
                 <details class="tactical-section rounded-xl p-4 backdrop-blur-md" style="background: rgba(20, 20, 35, 0.8);">
-                    <summary class="text-xl sm:text-2xl font-bold text-red-400 flex items-center" style="font-family: 'Orbitron', sans-serif;">
+                    <summary class="text-xl sm:text-2xl font-bold text-red-400 flex items-center sound-enabled" style="font-family: 'Orbitron', sans-serif;">
                         <span class="mr-2 text-2xl">💣</span> COMBAT & DAMAGE
                     </summary>
                     <div class="pt-4 space-y-4 text-gray-300">
@@ -600,7 +980,7 @@ TOTAL: <strong class="text-yellow-300">45 HP</strong> | AVG MOVEMENT: 2.7 tiles/
                 </details>
 
                 <details class="tactical-section rounded-xl p-4 backdrop-blur-md" style="background: rgba(20, 20, 35, 0.8);">
-                    <summary class="text-xl sm:text-2xl font-bold text-green-400 flex items-center" style="font-family: 'Orbitron', sans-serif;">
+                    <summary class="text-xl sm:text-2xl font-bold text-green-400 flex items-center sound-enabled" style="font-family: 'Orbitron', sans-serif;">
                         <span class="mr-2 text-2xl">🧠</span> TACTICAL STRATEGIES
                     </summary>
                     <div class="pt-4 grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-300">
@@ -628,7 +1008,7 @@ TOTAL: <strong class="text-yellow-300">45 HP</strong> | AVG MOVEMENT: 2.7 tiles/
                 </details>
 
                 <details class="tactical-section rounded-xl p-4 backdrop-blur-md" style="background: rgba(20, 20, 35, 0.8);">
-                    <summary class="text-xl sm:text-2xl font-bold text-purple-400 flex items-center" style="font-family: 'Orbitron', sans-serif;">
+                    <summary class="text-xl sm:text-2xl font-bold text-purple-400 flex items-center sound-enabled" style="font-family: 'Orbitron', sans-serif;">
                         <span class="mr-2 text-2xl">📊</span> BALANCE METRICS
                     </summary>
                     <div class="pt-4 text-gray-300 overflow-x-auto">
@@ -669,7 +1049,7 @@ TOTAL: <strong class="text-yellow-300">45 HP</strong> | AVG MOVEMENT: 2.7 tiles/
                             </tbody>
                         </table>
                         <p class="text-xs text-gray-500 mt-4 italic">
-                            Balanced 50-50 with Healer addition and Fog of War system. Tanker/Healer combo protects Trapper effectively.
+                            Balanced 50-50 with loadout customization and Fog of War system. Strategic depth from piece synergies and terrain control.
                         </p>
                     </div>
                 </details>
@@ -680,25 +1060,66 @@ TOTAL: <strong class="text-yellow-300">45 HP</strong> | AVG MOVEMENT: 2.7 tiles/
                 <p class="text-2xl font-bold gradient-text mb-3" style="font-family: 'Orbitron', sans-serif;">
                     CHASE - WHERE EVERY STEP COUNTS
                 </p>
-                <p class="tracking-wider">v3.0 - TACTICAL DEPLOYMENT SYSTEM</p>
-                <p class="text-xs mt-2 text-gray-600">Developed by Group IV | 2025</p>
+                <p class="tracking-wider">v3.5 - LOADOUT SYSTEM & COMPREHENSIVE ANALYSIS</p>
+                <p class="text-xs mt-2 text-gray-600">Developed by Group IV | 2024</p>
             </div>
         </div>
     </div>
 </div>
 
 <script>
+    // Sound Effects
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function playSound(type) {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        if (type === 'hover') {
+            oscillator.frequency.value = 600;
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.1);
+        } else if (type === 'click') {
+            oscillator.frequency.value = 800;
+            gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.15);
+        } else if (type === 'select') {
+            oscillator.frequency.value = 1000;
+            gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.2);
+        }
+    }
+
+    // Add sound effects to elements
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.sound-enabled').forEach(element => {
+            element.addEventListener('mouseenter', () => playSound('hover'));
+            element.addEventListener('click', () => playSound('click'));
+        });
+    });
+
     let MAX_RUNNERS = 9;
     let MAX_CHASERS = 18;
+    let currentRunnerLoadout = 'healer';
+    let currentChaserLoadout = 'standard';
     
     const MIN_PIECES = {
-        runner: { 'jumper': 1, 'sprinter': 1, 'tanker': 1, 'trapper': 1, 'healer': 1 },
-        chaser: { 'soldier': 1, 'general': 1, 'sniper': 1, 'steady': 1, 'scout': 1, 'president': 1 }
+        runner: { 'jumper': 1, 'sprinter': 1, 'tanker': 1, 'trapper': 1, 'support': 1 },
+        chaser: { 'soldier': 1, 'general': 1, 'specialist1': 1, 'specialist2': 1, 'specialist3': 1, 'president': 1 }
     };
     
     const MAX_UNIQUE_PIECES = {
-        runner: { 'trapper': 1, 'healer': 1 },
-        chaser: { 'sniper': 1, 'steady': 1, 'scout': 1, 'president': 1 }
+        runner: { 'trapper': 1, 'support': 1 },
+        chaser: { 'specialist1': 1, 'specialist2': 1, 'specialist3': 1, 'president': 1 }
     };
     
     const COLOR_MAP = {
@@ -712,6 +1133,92 @@ TOTAL: <strong class="text-yellow-300">45 HP</strong> | AVG MOVEMENT: 2.7 tiles/
         'pink': { text: 'text-pink-400', bg: 'rgba(236, 72, 153, 0.15)', border: 'border-pink-700' }
     };
 
+    function selectLoadout(team, type) {
+        playSound('select');
+        
+        if (team === 'runner') {
+            currentRunnerLoadout = type;
+            document.querySelectorAll('[name="runner-loadout"]').forEach(radio => {
+                radio.parentElement.parentElement.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            document.querySelector(`[value="${type}"]`).checked = true;
+            
+            updateRunnerSupportUnit(type);
+        } else if (team === 'chaser') {
+            currentChaserLoadout = type;
+            document.querySelectorAll('[name="chaser-loadout"]').forEach(radio => {
+                radio.parentElement.parentElement.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            document.querySelector(`[value="${type}"]`).checked = true;
+            
+            updateChaserSpecialist(type);
+        }
+        
+        showMessage(`LOADOUT SELECTED: ${type.toUpperCase()}`);
+    }
+
+    function updateRunnerSupportUnit(type) {
+        const icon = document.getElementById('support-icon');
+        const name = document.getElementById('support-name');
+        const ability = document.getElementById('support-ability');
+        const card = document.getElementById('support-unit-card');
+        
+        if (type === 'healer') {
+            icon.textContent = '💚';
+            name.textContent = 'HEALER';
+            ability.textContent = 'Heal 2 HP, 3-day CD | Vision: 15 tiles';
+            card.querySelector('.text-pink-400').style.color = '#f9a8d4';
+        } else if (type === 'teleporter') {
+            icon.textContent = '🌀';
+            name.textContent = 'TELEPORTER';
+            ability.textContent = 'Teleport ally >30 tiles, 3-day CD | Vision: 15 tiles';
+            card.querySelector('.font-bold').style.color = '#c084fc';
+        } else if (type === 'misfit') {
+            icon.textContent = '👻';
+            name.textContent = 'MISFIT';
+            ability.textContent = 'Create illusion (2HP, 4 days), 5-day CD | Vision: 15 tiles';
+            card.querySelector('.font-bold').style.color = '#67e8f9';
+        }
+    }
+
+    function updateChaserSpecialist(type) {
+        if (type === 'standard') {
+            // Sniper
+            document.getElementById('spec1-icon').textContent = '🎯';
+            document.getElementById('spec1-name').textContent = 'SNIPER';
+            document.getElementById('spec1-stats').textContent = 'MOVE: 2 | RANGE: 10 | DMG: 2';
+            document.getElementById('spec1-ability').textContent = 'Shoot through obstacles | Vision: 30 tiles';
+            
+            // Steady
+            document.getElementById('spec2-icon').textContent = '🗿';
+            document.getElementById('spec2-name').textContent = 'STEADY';
+            document.getElementById('spec2-stats').textContent = 'MOVE: 3 | RANGE: 3 | DMG: 1';
+            document.getElementById('spec2-ability').textContent = 'Regen 1HP/day | Vision: 10 tiles';
+            
+            // Scout
+            document.getElementById('spec3-icon').textContent = '👁️';
+            document.getElementById('spec3-name').textContent = 'SCOUT';
+            document.getElementById('spec3-stats').textContent = 'MOVE: 8 | RANGE: 3 | DMG: 1';
+            document.getElementById('spec3-ability').textContent = 'Trap immune | Vision: 20 tiles';
+        } else if (type === 'bomber') {
+            // Replace one with Bomber
+            document.getElementById('spec1-icon').textContent = '💥';
+            document.getElementById('spec1-name').textContent = 'BOMBER';
+            document.getElementById('spec1-stats').textContent = 'MOVE: 3 | RANGE: 6 | AoE: 5';
+            document.getElementById('spec1-ability').textContent = 'AoE 2 HP damage | Vision: 10 tiles';
+            document.getElementById('specialist-card-1').querySelector('.font-bold').style.color = '#fdba74';
+        } else if (type === 'overseer') {
+            // Replace one with Overseer
+            document.getElementById('spec2-icon').textContent = '👁️‍🗨️';
+            document.getElementById('spec2-name').textContent = 'OVERSEER';
+            document.getElementById('spec2-stats').textContent = 'MOVE: 3 | RANGE: 3 | DMG: 1';
+            document.getElementById('spec2-ability').textContent = 'Reveal 50 tiles, 8-day CD | Vision: 10 tiles';
+            document.getElementById('specialist-card-2').querySelector('.font-bold').style.color = '#fde047';
+        }
+    }
+
     function showMessage(text, isError = false) {
         const box = document.getElementById('messageBox');
         if (!box) return;
@@ -720,9 +1227,8 @@ TOTAL: <strong class="text-yellow-300">45 HP</strong> | AVG MOVEMENT: 2.7 tiles/
         box.className = isError ? 'bg-red-600 text-white' : 'bg-green-600 text-white';
         box.classList.add('message-box-show');
         
-        setTimeout(() => box.classList.remove('message-box-show'), 3000);
-    }
-
+        setTimeout(() => box.classList.remove('message-box-showVContinue'), 3000);
+}
     function copyLink() {
         const link = window.location.href;
         
@@ -795,7 +1301,7 @@ TOTAL: <strong class="text-yellow-300">45 HP</strong> | AVG MOVEMENT: 2.7 tiles/
     }
 
     function calculateRunnerStats() {
-        const runnerPieces = document.getElementById('runner-pieces').querySelectorAll('input[type="number"]');
+        const runnerPieces = document.getElementById('runner-pieces').querySelectorAll('input[type="number"]:not([disabled])');
         let totalHP = 0;
         let totalShield = 0;
         let totalPieces = 0;
@@ -824,6 +1330,11 @@ TOTAL: <strong class="text-yellow-300">45 HP</strong> | AVG MOVEMENT: 2.7 tiles/
             totalPieces += count;
         });
 
+        // Add fixed pieces
+        totalHP += 6; // Trapper
+        totalHP += 4; // Support unit
+        totalPieces += 2;
+
         const countEl = document.getElementById('runner-count');
         const hpEl = document.getElementById('runner-hp');
         const warningEl = document.getElementById('runner-warning');
@@ -845,7 +1356,7 @@ TOTAL: <strong class="text-yellow-300">45 HP</strong> | AVG MOVEMENT: 2.7 tiles/
     }
 
     function calculateChaserStats() {
-        const chaserPieces = document.getElementById('chaser-pieces').querySelectorAll('input[type="number"]');
+        const chaserPieces = document.getElementById('chaser-pieces').querySelectorAll('input[type="number"]:not([disabled])');
         let totalHP = 0;
         let totalPieces = 0;
 
@@ -869,6 +1380,11 @@ TOTAL: <strong class="text-yellow-300">45 HP</strong> | AVG MOVEMENT: 2.7 tiles/
             totalHP += count * baseHP;
             totalPieces += count;
         });
+
+        // Add fixed specialists
+        totalHP += 3 + 3 + 3; // 3 specialists
+        totalHP += 4; // President
+        totalPieces += 4;
 
         const countEl = document.getElementById('chaser-count');
         const hpEl = document.getElementById('chaser-hp');
@@ -901,6 +1417,9 @@ TOTAL: <strong class="text-yellow-300">45 HP</strong> | AVG MOVEMENT: 2.7 tiles/
         document.getElementById('chaser-name').addEventListener('input', () => updateTeamConfig('chaser'));
         document.getElementById('chaser-color').addEventListener('change', () => updateTeamConfig('chaser'));
         document.getElementById('balance-mode').addEventListener('change', applyBalanceMode);
+        
+        // Initialize loadout selections
+        updateRunnerSupportUnit('healer');
+        updateChaserSpecialist('standard');
     }
 </script>
-
